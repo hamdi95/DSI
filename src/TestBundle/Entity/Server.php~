@@ -1,0 +1,124 @@
+<?php
+
+namespace TestBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Server
+ *
+ * @ORM\Table(name="server")
+ * @ORM\Entity(repositoryClass="TestBundle\Repository\ServerRepository")
+ */
+class Server
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="etatServer", type="string", length=255, nullable=true)
+     */
+    private $etatServer = "vrai";
+
+    /**
+     * @ORM\ManyToMany(targetEntity="TestBundle\Entity\Logiciel", inversedBy="servers")
+     * @ORM\JoinTable(
+     *  name="server_logiciel",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="server_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="logiciel_id", referencedColumnName="id")
+     *  }
+     * )
+     */
+    private $logiciels;
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Server
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->logiciels = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add logiciel
+     *
+     * @param \TestBundle\Entity\Logiciel $logiciel
+     *
+     * @return Server
+     */
+    public function addLogiciel(\TestBundle\Entity\Logiciel $logiciel)
+    {
+        $this->logiciels[] = $logiciel;
+
+        return $this;
+    }
+
+    /**
+     * Remove logiciel
+     *
+     * @param \TestBundle\Entity\Logiciel $logiciel
+     */
+    public function removeLogiciel(\TestBundle\Entity\Logiciel $logiciel)
+    {
+        $this->logiciels->removeElement($logiciel);
+    }
+
+    /**
+     * Get logiciels
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLogiciels()
+    {
+        return $this->logiciels;
+    }
+}

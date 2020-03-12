@@ -1,0 +1,15 @@
+test_homepage:
+    path:     /
+    defaults: { _controller: TestBundle:Default:index }
+ajout_server:
+    path:     /ajoutServer
+    defaults: { _controller: TestBundle:Server:ajouterServeur }
+affiche_server:
+    path:     /afficheServer
+    defaults: { _controller: TestBundle:Server:read_servers }
+delete_server:
+    path:     /suppserver/{id}
+    defaults: { _controller: TestBundle:Server:deleteServer }
+ajout_logiciel:
+    path:     /ajoutLogiciel
+    defaults: { _controller: TestBundle:Logiciel:ajouterLogiciel }

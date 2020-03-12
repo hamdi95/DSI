@@ -1,0 +1,19 @@
+<h2>
+    Liste des logiciels
+</h2>
+<table border="2">
+    <tr>
+        <th>id</th>
+        <th>nom</th>
+        <th>serveur</th>
+        <th>supprimer</th>
+    </tr>
+    {% for e in server %}
+        <tr>
+            <th>e.id</th>
+            <th>e.nom</th>
+            <th>e.servers.nom</th>
+
+        </tr>
+    {% endfor %}
+</table>
